@@ -8,15 +8,15 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <div>
-    <Navbar></Navbar>
-    <div className='mt-16'>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
-        {/* <Route path="/cart" element={<CartPage />} /> */}
-      </Routes>
+      <Navbar />
+      <div className='pt-16 px-4 lg:px-10 lg:py-8 mt-10'>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          {/* <Route path="/cart" element={<CartPage />} /> */}
+        </Routes>
       </div>
-        </div>
+    </div>
   );
 }
 
