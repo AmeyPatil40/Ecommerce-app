@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useCart } from "../context/CartContext";
+import { toast } from "react-toastify"; // Import toast
 
 const ProductPage = () => {
   const { id } = useParams();
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -40,6 +43,13 @@ const ProductPage = () => {
   const handleQuantityChange = (e) => {
     const value = Math.max(0, parseInt(e.target.value, 10));
     setQuantity(value);
+  };
+
+  const handleAddToCart = () => {
+    if (quantity > 0) {
+      addToCart(product, quantity);
+      toast.success(`${product.title} added to cart!`); // Display success toast
+    }
   };
 
   return (
@@ -103,6 +113,7 @@ const ProductPage = () => {
                 className="w-16 p-2 border border-gray-300 rounded-md"
               />
               <button
+                onClick={handleAddToCart}
                 className={`bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-indigo-500 transition-colors ${
                   quantity <= 0 ? "opacity-50 cursor-not-allowed" : ""
                 }`}
